@@ -20,7 +20,7 @@
           <tr v-for="item in booksList" :key="item.id">
             <td>{{ item.title }}</td>
             <td>{{ item.description }}</td>
-            <td>{{ formatDate(item) }}</td>
+            <td>{{ formatDate(item.publishDate) }}</td>
           </tr>
         </tbody>
       </v-table>
@@ -46,12 +46,16 @@ export default defineComponent({
   props: {
     books: Array,
   },
+  computed: {
+    formatDate() {
+      return (date: string) => {
+        return moment(date).format("MM/DD/YYYY hh:mm");
+      };
+    },
+  },
   methods: {
     onSearch() {
       this.$emit(SearchEvent);
-    },
-    formatDate(item) {
-      return moment(item.publishDate).format("MM/DD/YYYY hh:mm");
     },
     filter() {
       if (this.books.length > 0) {
