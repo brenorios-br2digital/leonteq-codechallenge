@@ -2,8 +2,16 @@
   <v-card>
     <v-container>
       <v-row>
-        <v-text-field v-model="title" label="Title"></v-text-field>
-        <v-text-field v-model="publishDate" label="Publish date"></v-text-field>
+        <v-text-field
+          v-model="title"
+          @input="filter"
+          label="Title"
+        ></v-text-field>
+        <v-text-field
+          v-model="publishDate"
+          @input="filter"
+          label="Publish date"
+        ></v-text-field>
       </v-row>
     </v-container>
     <v-btn @click="onSearch" block> Search </v-btn>
@@ -79,12 +87,6 @@ export default defineComponent({
   watch: {
     books(newBooks) {
       this.booksList = newBooks;
-    },
-    title() {
-      this.filter();
-    },
-    publishDate() {
-      this.filter();
     },
   },
 });
